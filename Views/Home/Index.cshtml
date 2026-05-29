@@ -1,0 +1,144 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="page-header">
+    <div class="breadcrumb-custom"><a href="#">Inicio</a> <i class="bi bi-chevron-right" style="font-size:10px;"></i> Dashboard</div>
+    <div class="page-header-title">Panel de Control Patrimonial</div>
+    <div class="page-header-sub">Resumen general del sistema – Período actual</div>
+</div>
+
+<!-- Stat cards row (Mock Data) -->
+<div class="row g-4 mb-4">
+    <div class="col-sm-6 col-xl-3">
+    <div class="stat-card">
+        <div class="stat-icon blue"><i class="bi bi-box-seam"></i></div>
+        <div style="min-width: 0; flex: 1;">
+        <div class="stat-value">@(ViewBag.TotalBienes ?? 0)</div>
+        <div class="stat-label">Total de Bienes</div>
+        <div class="stat-change up"><i class="bi bi-arrow-up-short"></i>+@(ViewBag.NuevosEsteMes ?? 0) este mes</div>
+        </div>
+    </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+    <div class="stat-card">
+        <div class="stat-icon green"><i class="bi bi-currency-dollar"></i></div>
+        <div style="min-width: 0; flex: 1;">
+        <div class="stat-value">S/ 0</div>
+        <div class="stat-label">Valor Total</div>
+        <div class="stat-change text-muted" style="color: #94A3B8 !important;"><i class="bi bi-dash"></i>Sin datos</div>
+        </div>
+    </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+    <div class="stat-card">
+        <div class="stat-icon orange"><i class="bi bi-graph-down"></i></div>
+        <div style="min-width: 0; flex: 1;">
+        <div class="stat-value">S/ 0</div>
+        <div class="stat-label">Depreciación Acum.</div>
+        <div class="stat-change text-muted" style="color: #94A3B8 !important;"><i class="bi bi-dash"></i>Sin datos</div>
+        </div>
+    </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+    <div class="stat-card">
+        <div class="stat-icon purple"><i class="bi bi-people"></i></div>
+        <div style="min-width: 0; flex: 1;">
+        <div class="stat-value">@(ViewBag.TotalResponsables ?? 0)</div>
+        <div class="stat-label">Responsables</div>
+        <div class="stat-change text-muted" style="color: #94A3B8 !important;"><i class="bi bi-person-check"></i>Usuarios registrados</div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<h4 class="mb-3 mt-4" style="font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--primary);">Accesos Rápidos</h4>
+<div class="row g-4">
+    <!-- Inventario -->
+    <div class="col-12 col-md-6 col-xl-3">
+        <a asp-controller="Inventario" asp-action="Index" class="dash-card text-decoration-none">
+            <div class="dash-icon"><i class="bi bi-boxes"></i></div>
+            <div class="dash-card-content">
+                <h5>Gestión Inventario</h5>
+                <span>Ver lista de bienes</span>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Añadir Herramienta -->
+    <div class="col-12 col-md-6 col-xl-3">
+        <a asp-controller="Inventario" asp-action="Create" class="dash-card text-decoration-none">
+            <div class="dash-icon"><i class="bi bi-plus-circle"></i></div>
+            <div class="dash-card-content">
+                <h5>Nuevo Bien</h5>
+                <span>Registrar en sistema</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Usuarios -->
+    <div class="col-12 col-md-6 col-xl-3">
+        <a asp-controller="Usuarios" asp-action="Index" class="dash-card text-decoration-none">
+            <div class="dash-icon" style="color: #7C3AED; background: #F5F3FF;"><i class="bi bi-people"></i></div>
+            <div class="dash-card-content">
+                <h5>Usuarios</h5>
+                <span>Gestionar accesos</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Reportes -->
+    <div class="col-12 col-md-6 col-xl-3">
+        <a asp-controller="Reportes" asp-action="Index" class="dash-card text-decoration-none">
+            <div class="dash-icon" style="color: var(--success); background: #ECFDF5;"><i class="bi bi-graph-up-arrow"></i></div>
+            <div class="dash-card-content">
+                <h5>Reportes</h5>
+                <span>Análisis y métricas</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Alertas -->
+    <div class="col-12 col-md-6 col-xl-3">
+        <a href="#" class="dash-card text-decoration-none">
+            <div class="dash-icon" style="color: var(--warning); background: #FFF7ED;"><i class="bi bi-bell"></i></div>
+            <div class="dash-card-content">
+                <h5>Notificaciones</h5>
+                <span>Avisos del sistema</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Préstamos -->
+    <div class="col-12 col-md-6 col-xl-3">
+        <a href="#" class="dash-card text-decoration-none">
+            <div class="dash-icon" style="color: var(--accent); background: var(--accent-soft);"><i class="bi bi-arrow-left-right"></i></div>
+            <div class="dash-card-content">
+                <h5>Préstamos</h5>
+                <span>Control de asignación</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Mantenimiento -->
+    <div class="col-12 col-md-6 col-xl-3">
+        <a href="#" class="dash-card text-decoration-none">
+            <div class="dash-icon" style="color: var(--danger); background: #FEF2F2;"><i class="bi bi-wrench"></i></div>
+            <div class="dash-card-content">
+                <h5>Mantenimiento</h5>
+                <span>Servicio técnico</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Configuración -->
+    <div class="col-12 col-md-6 col-xl-3">
+        <a href="#" class="dash-card text-decoration-none">
+            <div class="dash-icon" style="color: var(--text-muted); background: #F1F5F9;"><i class="bi bi-gear"></i></div>
+            <div class="dash-card-content">
+                <h5>Configuración</h5>
+                <span>Ajustes generales</span>
+            </div>
+        </a>
+    </div>
+</div>

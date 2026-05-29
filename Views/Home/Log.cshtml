@@ -1,0 +1,18 @@
+@model List<string>
+@{ ViewData["Title"] = "Registro de Actividad"; }
+<div class="container mt-4">
+    <h2>Registro de Actividad del Sistema</h2>
+    <p class="text-muted">Singleton AppLogger — mostrando los últimos 50 registros</p>
+    <div class="card">
+        <div class="card-body" style="background:#1e1e1e; border-radius:8px">
+            @foreach (var linea in Model) {
+                var color = linea.Contains("ERROR") ? "#ff6b6b" :
+                            linea.Contains("ADVERTENCIA") ? "#ffd93d" : "#6bcb77";
+                <p style="font-family:monospace; font-size:13px; color:@color; margin:2px 0">
+                    @linea
+                </p>
+            }
+        </div>
+    </div>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary mt-3">Volver</a>
+</div>

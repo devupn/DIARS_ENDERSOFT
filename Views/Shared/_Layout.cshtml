@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Control Patrimonial</title>
+    
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- FontAwesome (Existing) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Bootstrap Icons (New Design) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EMDERSOFT.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div id="app-layout">
+        <!-- ── OVERLAY ── -->
+        <div id="sidebar-overlay"></div>
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon"><i class="bi bi-building-check"></i></div>
+                <div class="brand-text">
+                    Control Patrimonial
+                    <span>Emdersoft SAC</span>
+                </div>
+            </div>
+
+            <p class="nav-section-label">Principal</p>
+            <ul class="sidebar-nav">
+                <li>
+                    <a asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-grid-1x2"></i> Dashboard
+                    </a>
+                </li>
+            </ul>
+
+            <p class="nav-section-label">Gestión</p>
+            <ul class="sidebar-nav">
+                <li>
+                    <a asp-controller="Inventario" asp-action="Create">
+                        <i class="bi bi-plus-square"></i> Registro de Bienes
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Inventario" asp-action="Index">
+                        <i class="bi bi-table"></i> Lista de Bienes
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-person-check"></i> Asignación
+                    </a>
+                </li>
+            </ul>
+
+            <p class="nav-section-label">Inventario</p>
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="#">
+                        <i class="bi bi-clipboard-check"></i> Inventario Físico
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-arrow-left-right"></i> Transferencias
+                    </a>
+                </li>
+            </ul>
+
+            <p class="nav-section-label">Análisis</p>
+            <ul class="sidebar-nav">
+                <li>
+                    <a asp-controller="Reportes" asp-action="Index">
+                        <i class="bi bi-bar-chart-line"></i> Reportes
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="Log">
+                        <i class="bi bi-journal-text"></i> Log del Sistema
+                    </a>
+                </li>
+            </ul>
+
+            @if (User.IsInRole("Administrador"))
+            {
+                <p class="nav-section-label">Configuración</p>
+                <ul class="sidebar-nav">
+                    <li>
+                        <a asp-controller="Usuarios" asp-action="Index">
+                            <i class="bi bi-people"></i> Usuarios
+                        </a>
+                    </li>
+                </ul>
+            }
+
+            <div class="sidebar-footer">
+                <div class="avatar-sm">@(User.Identity?.Name?.Length >= 2 ? User.Identity.Name.Substring(0, 2).ToUpper() : "US")</div>
+                <div>
+                    <div class="sidebar-user-name">@User.Identity?.Name</div>
+                    <div class="sidebar-user-role">@User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value</div>
+                </div>
+                <a asp-controller="Account" asp-action="Logout" style="margin-left:auto; color:#8C9FBE; font-size:18px;" title="Salir">
+                    <i class="bi bi-box-arrow-right"></i>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ── TOPBAR ── -->
+        <header class="topbar">
+            <button id="sidebarCollapse" style="background:none;border:none;font-size:22px;color:var(--text-main);display:none;">
+                <i class="bi bi-list"></i>
+            </button>
+            <span class="topbar-title" id="topbar-title">@ViewData["Title"]</span>
+
+            <div class="topbar-search d-none d-md-block">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Buscar bienes, usuarios…" />
+            </div>
+
+            <div class="topbar-icon-btn" title="Notificaciones">
+                <i class="bi bi-bell"></i>
+                <span class="notif-dot"></span>
+            </div>
+            <div class="topbar-icon-btn" title="Configuración">
+                <i class="bi bi-gear"></i>
+            </div>
+            <div class="avatar-sm" style="cursor:pointer; width:40px; height:40px;" title="Perfil">@(User.Identity?.Name?.Length >= 2 ? User.Identity.Name.Substring(0, 2).ToUpper() : "US")</div>
+        </header>
+
+        <!-- ── MAIN CONTENT ── -->
+        <main class="main-content">
+            <div class="content-area">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            // Alternar menú y capa oscura en móviles
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('open');
+                $('#sidebar-overlay').toggleClass('active');
+            });
+
+            // Cerrar menú al tocar capa oscura
+            $('#sidebar-overlay').on('click', function () {
+                $('#sidebar').removeClass('open');
+                $(this).removeClass('active');
+            });
+            
+            // Resaltar opción activa en el menú
+            var url = window.location.pathname;
+            $('ul.sidebar-nav li a').each(function() {
+                if($(this).attr('href') === url || (url === '/' && $(this).attr('href') === '/')) {
+                    $('ul.sidebar-nav li a').removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+            
+            // Ocultar/mostrar menú según tamaño de pantalla
+            function handleResize() {
+                if (window.innerWidth <= 900) {
+                    $('#sidebarCollapse').show();
+                } else {
+                    $('#sidebarCollapse').hide();
+                    $('#sidebar').removeClass('open');
+                    $('#sidebar-overlay').removeClass('active');
+                }
+            }
+            window.addEventListener('resize', handleResize);
+            handleResize();
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

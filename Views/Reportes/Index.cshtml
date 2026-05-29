@@ -1,0 +1,34 @@
+@{ ViewData["Title"] = "Reportes"; }
+<div class="container mt-4">
+    <h2>Reportes del Sistema</h2>
+    <p class="text-muted">Patrón Builder: cada reporte se construye con las secciones necesarias</p>
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">Reporte Completo</div>
+                <div class="card-body">
+                    <p>Incluye estadísticas, estado, stock e información de categorías.</p>
+                    <a asp-action="Completo" class="btn btn-success">Generar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">Resumen Ejecutivo</div>
+                <div class="card-body">
+                    <p>Solo estadísticas generales y resumen por categoría y estado.</p>
+                    <a asp-action="Resumen" class="btn btn-primary">Generar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-warning">
+                <div class="card-header bg-warning">Reporte de Inventario</div>
+                <div class="card-body">
+                    <p>Focalizado en las herramientas sin stock (Cantidad 0).</p>
+                    <a asp-action="Inventario" class="btn btn-warning">Generar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

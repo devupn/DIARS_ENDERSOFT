@@ -1,0 +1,96 @@
+@model EMDERSOFT.Patterns.Builder.ReporteHerramientas
+@{ ViewData["Title"] = Model.Titulo; }
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>@Model.Titulo</h2>
+        <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
+    </div>
+
+    <p class="text-muted">Generado el @Model.FechaGeneracion.ToString("dd/MM/yyyy HH:mm")</p>
+
+    @* Secciones incluidas *@
+    <div class="mb-3">
+        @foreach (var seccion in Model.SeccionesIncluidas) {
+            <span class="badge bg-secondary me-1">@seccion</span>
+        }
+    </div>
+
+    @* Estadísticas *@
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card text-center p-3 bg-light">
+                <h3>@Model.TotalHerramientas</h3>
+                <p class="mb-0">Total Herramientas Distintas</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-center p-3 bg-light">
+                <h3>@Model.TotalCantidadStock</h3>
+                <p class="mb-0">Unidades en Stock (Total)</p>
+            </div>
+        </div>
+    </div>
+
+    @* Herramientas más abundantes *@
+    @if (Model.HerramientasMasAbundantes != null) {
+        <h4>Herramientas con más stock</h4>
+        <table class="table table-sm table-bordered mb-4">
+            <thead class="table-dark"><tr><th>Nombre</th><th>Categoría</th><th>Cantidad</th></tr></thead>
+            <tbody>
+                @foreach (var h in Model.HerramientasMasAbundantes) {
+                    <tr><td>@h.Nombre</td><td>@(h.Categoria?.Nombre ?? "Sin categoría")</td><td>@h.Cantidad</td></tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @* Herramientas sin stock *@
+    @if (Model.HerramientasSinStock != null) {
+        <h4>Herramientas sin stock (@Model.HerramientasSinStock.Count)</h4>
+        @if (!Model.HerramientasSinStock.Any()) {
+            <p class="text-success">Todas las herramientas tienen stock disponible.</p>
+        }
+        else
+        {
+            <ul class="list-group mb-4">
+                @foreach (var h in Model.HerramientasSinStock) {
+                    <li class="list-group-item list-group-item-danger">@h.Nombre - @h.Ubicacion</li>
+                }
+            </ul>
+        }
+    }
+
+    @* Resumen por categoría *@
+    @if (Model.ResumenPorCategoria != null) {
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Resumen por categoría</h4>
+                <table class="table table-sm table-bordered mb-4">
+                    <thead class="table-dark"><tr><th>Categoría</th><th>Variedad de Herramientas</th></tr></thead>
+                    <tbody>
+                        @foreach (var cat in Model.ResumenPorCategoria)
+                        {
+                            <tr><td>@cat.Key</td><td>@cat.Value</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+            @if(Model.ResumenPorEstado != null)
+            {
+                <div class="col-md-6">
+                    <h4>Resumen por Estado</h4>
+                    <table class="table table-sm table-bordered mb-4">
+                        <thead class="table-dark"><tr><th>Estado</th><th>Variedad de Herramientas</th></tr></thead>
+                        <tbody>
+                            @foreach (var est in Model.ResumenPorEstado)
+                            {
+                                <tr><td>@est.Key</td><td>@est.Value</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,34 @@
+@model EMDERSOFT.Models.Herramienta
+
+@{
+    ViewData["Title"] = "Eliminar Herramienta";
+}
+
+<div class="container mt-4">
+    <h2>Eliminar Herramienta</h2>
+    <hr />
+
+    <div class="alert alert-danger">
+        Esta seguro que desea eliminar <strong>@Model.Nombre</strong>?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.Nombre</dd>
+
+        <dt class="col-sm-3">Categoria</dt>
+        <dd class="col-sm-9">@(Model.Categoria?.Nombre ?? "Sin categoría")</dd>
+
+        <dt class="col-sm-3">Cantidad</dt>
+        <dd class="col-sm-9">@Model.Cantidad</dd>
+
+        <dt class="col-sm-3">Estado</dt>
+        <dd class="col-sm-9">@Model.Estado</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Si, Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

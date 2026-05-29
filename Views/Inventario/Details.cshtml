@@ -1,0 +1,64 @@
+@model EMDERSOFT.Models.Herramienta
+
+@{
+    ViewData["Title"] = "Detalle de Herramienta";
+}
+
+<div class="container mt-4">
+    <h2>Detalle de Herramienta</h2>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.Nombre</dd>
+
+        <dt class="col-sm-3">Descripcion</dt>
+        <dd class="col-sm-9">@Model.Descripcion</dd>
+
+        <dt class="col-sm-3">Categoria</dt>
+        <dd class="col-sm-9">@(Model.Categoria?.Nombre ?? "Sin categoría")</dd>
+
+        <dt class="col-sm-3">Cantidad</dt>
+        <dd class="col-sm-9">@Model.Cantidad</dd>
+
+        <dt class="col-sm-3">Estado</dt>
+        <dd class="col-sm-9">@Model.Estado</dd>
+
+        <dt class="col-sm-3">Ubicacion</dt>
+        <dd class="col-sm-9">@Model.Ubicacion</dd>
+
+        <dt class="col-sm-3">Fecha Registro</dt>
+        <dd class="col-sm-9">@Model.FechaRegistro.ToString("dd/MM/yyyy")</dd>
+    </dl>
+    <hr />
+@if (Model.Detalle != null)
+{
+    <h5>Detalle Técnico</h5>
+    <dl class="row">
+        <dt class="col-sm-3">Marca</dt>
+        <dd class="col-sm-9">@Model.Detalle.Marca</dd>
+        <dt class="col-sm-3">Modelo</dt>
+        <dd class="col-sm-9">@Model.Detalle.Modelo</dd>
+        <dt class="col-sm-3">Garantía</dt>
+        <dd class="col-sm-9">@Model.Detalle.GarantiaMeses meses</dd>
+        <dt class="col-sm-3">Especificaciones</dt>
+        <dd class="col-sm-9">@Model.Detalle.Especificaciones</dd>
+    </dl>
+}
+else
+{
+    <p class="text-muted">Esta herramienta aún no tiene ficha técnica.</p>
+}
+
+<div class="d-flex gap-2 mt-3">
+    <a asp-controller="Detalles" asp-action="Editar"
+       asp-route-id="@Model.Id" class="btn btn-secondary">
+        @(Model.Detalle != null ? "Editar Detalle" : "Agregar Detalle")
+    </a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar Herramienta</a>
+    <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
+</div>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>

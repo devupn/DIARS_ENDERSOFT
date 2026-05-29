@@ -1,0 +1,32 @@
+@model EMDERSOFT.Models.Usuario
+
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<div class="container mt-4">
+    <h2>Eliminar Usuario</h2>
+    <h4 class="text-danger">¿Estás seguro de que quieres eliminar a este usuario?</h4>
+    <hr />
+    <div class="card shadow-sm border-0 border-danger mb-4">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Username)</dt>
+                <dd class="col-sm-9 fw-medium">@Html.DisplayFor(model => model.Username)</dd>
+                
+                <dt class="col-sm-3 text-muted">Nivel de Acceso</dt>
+                <dd class="col-sm-9">
+                    <span class="badge bg-secondary">@Html.DisplayFor(model => model.Rol)</span>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar Definitivamente</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

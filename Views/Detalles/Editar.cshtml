@@ -1,0 +1,73 @@
+@model EMDERSOFT.Models.DetalleHerramienta
+@{
+    ViewData["Title"] = "Detalle Técnico";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0">Detalle Técnico: @Model.Herramienta?.Nombre</h4>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                    <form asp-action="Editar" novalidate>
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="HerramientaId" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Marca" class="form-label fw-bold"></label>
+                                <input asp-for="Marca" class="form-control" placeholder="Ej: Bosch" />
+                                <span asp-validation-for="Marca" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Modelo" class="form-label fw-bold"></label>
+                                <input asp-for="Modelo" class="form-control" placeholder="Ej: GSB 120" />
+                                <span asp-validation-for="Modelo" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Peso" class="form-label fw-bold"></label>
+                                <div class="input-group">
+                                    <input asp-for="Peso" class="form-control" placeholder="0.000" />
+                                    <span class="input-group-text">kg</span>
+                                </div>
+                                <span asp-validation-for="Peso" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="GarantiaMeses" class="form-label fw-bold"></label>
+                                <div class="input-group">
+                                    <input asp-for="GarantiaMeses" class="form-control" placeholder="12" />
+                                    <span class="input-group-text">meses</span>
+                                </div>
+                                <span asp-validation-for="GarantiaMeses" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Especificaciones" class="form-label fw-bold"></label>
+                            <textarea asp-for="Especificaciones" class="form-control" rows="4"
+                                placeholder="Características técnicas de la herramienta..."></textarea>
+                            <span asp-validation-for="Especificaciones" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-3">
+                            <button type="submit" class="btn btn-secondary">Guardar Detalle</button>
+                            <a asp-controller="Inventario" asp-action="Details"
+                               asp-route-id="@Model.HerramientaId"
+                               class="btn btn-outline-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
