@@ -4,29 +4,51 @@
     ViewData["Title"] = "Eliminar Usuario";
 }
 
-<div class="container mt-4">
-    <h2>Eliminar Usuario</h2>
-    <h4 class="text-danger">¿Estás seguro de que quieres eliminar a este usuario?</h4>
-    <hr />
-    <div class="card shadow-sm border-0 border-danger mb-4">
-        <div class="card-body">
-            <dl class="row mb-0">
-                <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Username)</dt>
-                <dd class="col-sm-9 fw-medium">@Html.DisplayFor(model => model.Username)</dd>
-                
-                <dt class="col-sm-3 text-muted">Nivel de Acceso</dt>
-                <dd class="col-sm-9">
-                    <span class="badge bg-secondary">@Html.DisplayFor(model => model.Rol)</span>
-                </dd>
-            </dl>
-        </div>
+<div class="page-header">
+    <div class="breadcrumb-custom">
+        <a asp-controller="Home" asp-action="Index">Inicio</a>
+        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
+        <a asp-action="Index">Usuarios</a>
+        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
+        Eliminar
     </div>
+</div>
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar Definitivamente</button>
-            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="danger-card">
+            <div class="danger-card-title">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                Confirmar eliminacion
+            </div>
+            <div class="danger-card-text">
+                Esta accion es permanente. El usuario sera eliminado del sistema de forma definitiva.
+            </div>
         </div>
-    </form>
+
+        <div class="detail-card">
+            <div class="detail-card-body">
+                <div class="detail-row">
+                    <span class="detail-label">Usuario</span>
+                    <span class="detail-value" style="font-weight:700;">@Html.DisplayFor(model => model.Username)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Nivel de Acceso</span>
+                    <span class="detail-value">
+                        <span class="badge bg-secondary" style="border-radius:8px; font-size:12px;">@Html.DisplayFor(model => model.Rol)</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="Delete" class="mt-4">
+            <input type="hidden" asp-for="Id" />
+            <div class="d-flex gap-2 flex-wrap">
+                <button type="submit" class="btn btn-danger" style="border-radius:10px; padding:10px 20px; font-weight:600;">
+                    <i class="bi bi-trash"></i> Eliminar Definitivamente
+                </button>
+                <a asp-action="Index" class="btn-outline-custom">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>

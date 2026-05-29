@@ -4,47 +4,56 @@
     ViewData["Title"] = "Editar Usuario";
 }
 
-<div class="container mt-4">
-    <h2>Editar Usuario</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <form asp-action="Edit">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Id" />
-                        
-                        <div class="mb-3">
-                            <label asp-for="Username" class="form-label fw-medium"></label>
-                            <input asp-for="Username" class="form-control" />
-                            <span asp-validation-for="Username" class="text-danger"></span>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label asp-for="Password" class="form-label fw-medium"></label>
-                            <input asp-for="Password" type="password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label asp-for="Rol" class="form-label fw-medium">Nivel de Acceso</label>
-                            <select asp-for="Rol" class="form-select">
-                                <option value="Administrador">Administrador</option>
-                                <option value="Jefe de Proyecto">Jefe de Proyecto</option>
-                                <option value="Encargado de Almacén">Encargado de Almacén</option>
-                                <option value="Responsable de Sede">Responsable de Sede</option>
-                            </select>
-                            <span asp-validation-for="Rol" class="text-danger"></span>
-                        </div>
-                        
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar Cambios</button>
-                            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-                        </div>
-                    </form>
+<div class="page-header">
+    <div class="breadcrumb-custom">
+        <a asp-controller="Home" asp-action="Index">Inicio</a>
+        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
+        <a asp-action="Index">Usuarios</a>
+        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
+        Editar
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="form-card">
+            <div class="form-section-title">Editar Usuario</div>
+            <div class="form-section-sub">Modifique los datos del usuario y guarde los cambios</div>
+
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" style="border-radius:10px; font-size:13.5px;"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger small"></span>
                 </div>
-            </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Rol" class="form-label">Nivel de Acceso</label>
+                    <select asp-for="Rol" class="form-select">
+                        <option value="Administrador">Administrador</option>
+                        <option value="Jefe de Proyecto">Jefe de Proyecto</option>
+                        <option value="Encargado de Almacen">Encargado de Almacen</option>
+                        <option value="Responsable de Sede">Responsable de Sede</option>
+                    </select>
+                    <span asp-validation-for="Rol" class="text-danger small"></span>
+                </div>
+
+                <div class="d-flex gap-2 flex-wrap">
+                    <button type="submit" class="btn-primary-custom">
+                        <i class="bi bi-save"></i> Guardar Cambios
+                    </button>
+                    <a asp-action="Index" class="btn-outline-custom">Cancelar</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

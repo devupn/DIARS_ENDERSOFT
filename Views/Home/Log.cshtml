@@ -1,18 +1,41 @@
 @model List<string>
 @{ ViewData["Title"] = "Registro de Actividad"; }
-<div class="container mt-4">
-    <h2>Registro de Actividad del Sistema</h2>
-    <p class="text-muted">Singleton AppLogger — mostrando los últimos 50 registros</p>
-    <div class="card">
-        <div class="card-body" style="background:#1e1e1e; border-radius:8px">
-            @foreach (var linea in Model) {
-                var color = linea.Contains("ERROR") ? "#ff6b6b" :
-                            linea.Contains("ADVERTENCIA") ? "#ffd93d" : "#6bcb77";
-                <p style="font-family:monospace; font-size:13px; color:@color; margin:2px 0">
-                    @linea
-                </p>
+
+<div class="page-header">
+    <div class="breadcrumb-custom">
+        <a asp-controller="Home" asp-action="Index">Inicio</a>
+        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
+        Log del Sistema
+    </div>
+    <div class="page-header-title">Registro de Actividad</div>
+    <div class="page-header-sub">Singleton AppLogger &mdash; mostrando los ultimos 50 registros</div>
+</div>
+
+<div class="section-card">
+    <div class="section-card-header">
+        <div class="section-card-title">
+            <i class="bi bi-terminal" style="color:var(--accent);"></i>
+            Consola de Actividad
+        </div>
+        <a asp-controller="Home" asp-action="Index" class="btn-outline-custom">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+    </div>
+    <div class="section-card-body" style="padding: 0;">
+        <div class="log-terminal">
+            @if (Model == null || !Model.Any())
+            {
+                <p class="log-line success">Sin registros disponibles.</p>
+            }
+            else
+            {
+                @foreach (var linea in Model)
+                {
+                    string cssClass = linea.Contains("ERROR") ? "error" :
+                                      linea.Contains("ADVERTENCIA") ? "warning" : "success";
+                    <p class="log-line @cssClass">@linea</p>
+                }
             }
         </div>
     </div>
-    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary mt-3">Volver</a>
 </div>

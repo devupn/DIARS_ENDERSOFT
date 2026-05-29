@@ -4,31 +4,59 @@
     ViewData["Title"] = "Eliminar Herramienta";
 }
 
-<div class="container mt-4">
-    <h2>Eliminar Herramienta</h2>
-    <hr />
-
-    <div class="alert alert-danger">
-        Esta seguro que desea eliminar <strong>@Model.Nombre</strong>?
+<div class="page-header">
+    <div class="breadcrumb-custom">
+        <a asp-controller="Home" asp-action="Index">Inicio</a>
+        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
+        <a asp-action="Index">Inventario</a>
+        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
+        Eliminar
     </div>
+</div>
 
-    <dl class="row">
-        <dt class="col-sm-3">Nombre</dt>
-        <dd class="col-sm-9">@Model.Nombre</dd>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="danger-card">
+            <div class="danger-card-title">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                Confirmar eliminacion
+            </div>
+            <div class="danger-card-text">
+                Esta accion es permanente. El bien <strong>@Model.Nombre</strong> sera eliminado del sistema.
+            </div>
+        </div>
 
-        <dt class="col-sm-3">Categoria</dt>
-        <dd class="col-sm-9">@(Model.Categoria?.Nombre ?? "Sin categoría")</dd>
+        <div class="detail-card">
+            <div class="detail-card-body">
+                <div class="detail-row">
+                    <span class="detail-label">Nombre</span>
+                    <span class="detail-value" style="font-weight:700;">@Model.Nombre</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Categoria</span>
+                    <span class="detail-value">@(Model.Categoria?.Nombre ?? "Sin categoria")</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Cantidad</span>
+                    <span class="detail-value">@Model.Cantidad</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Estado</span>
+                    <span class="detail-value">@Model.Estado</span>
+                </div>
+            </div>
+        </div>
 
-        <dt class="col-sm-3">Cantidad</dt>
-        <dd class="col-sm-9">@Model.Cantidad</dd>
-
-        <dt class="col-sm-3">Estado</dt>
-        <dd class="col-sm-9">@Model.Estado</dd>
-    </dl>
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <button type="submit" class="btn btn-danger">Si, Eliminar</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-    </form>
+        <form asp-action="Delete" class="mt-4">
+            <input type="hidden" asp-for="Id" />
+            <div class="d-flex gap-2 flex-wrap">
+                <button type="submit" class="btn btn-danger" style="border-radius:10px; padding:10px 20px; font-weight:600;">
+                    <i class="bi bi-trash"></i> Si, Eliminar
+                </button>
+                <a asp-action="Index" class="btn-outline-custom">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
 </div>

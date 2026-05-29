@@ -1,33 +1,57 @@
 @{ ViewData["Title"] = "Reportes"; }
-<div class="container mt-4">
-    <h2>Reportes del Sistema</h2>
-    <p class="text-muted">Patrón Builder: cada reporte se construye con las secciones necesarias</p>
-    <div class="row mt-4">
-        <div class="col-md-4 mb-3">
-            <div class="card border-success">
-                <div class="card-header bg-success text-white">Reporte Completo</div>
-                <div class="card-body">
-                    <p>Incluye estadísticas, estado, stock e información de categorías.</p>
-                    <a asp-action="Completo" class="btn btn-success">Generar</a>
-                </div>
+
+<div class="page-header">
+    <div class="breadcrumb-custom">
+        <a asp-controller="Home" asp-action="Index">Inicio</a>
+        <i class="bi bi-chevron-right" style="font-size:10px;"></i>
+        Reportes
+    </div>
+    <div class="page-header-title">Reportes del Sistema</div>
+    <div class="page-header-sub">Patron Builder: cada reporte se construye con las secciones necesarias</div>
+</div>
+
+<div class="row g-4">
+    <div class="col-12 col-sm-6 col-xl-4">
+        <div class="report-card">
+            <div class="report-card-header green">
+                <i class="bi bi-file-earmark-bar-graph"></i>
+                Reporte Completo
+            </div>
+            <div class="report-card-body">
+                <p>Incluye estadisticas, estado, stock e informacion de categorias.</p>
+                <a asp-action="Completo" class="btn-primary-custom" style="background: var(--success);">
+                    <i class="bi bi-play-circle"></i> Generar
+                </a>
             </div>
         </div>
-        <div class="col-md-4 mb-3">
-            <div class="card border-primary">
-                <div class="card-header bg-primary text-white">Resumen Ejecutivo</div>
-                <div class="card-body">
-                    <p>Solo estadísticas generales y resumen por categoría y estado.</p>
-                    <a asp-action="Resumen" class="btn btn-primary">Generar</a>
-                </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-4">
+        <div class="report-card">
+            <div class="report-card-header blue">
+                <i class="bi bi-graph-up"></i>
+                Resumen Ejecutivo
+            </div>
+            <div class="report-card-body">
+                <p>Solo estadisticas generales y resumen por categoria y estado.</p>
+                <a asp-action="Resumen" class="btn-primary-custom">
+                    <i class="bi bi-play-circle"></i> Generar
+                </a>
             </div>
         </div>
-        <div class="col-md-4 mb-3">
-            <div class="card border-warning">
-                <div class="card-header bg-warning">Reporte de Inventario</div>
-                <div class="card-body">
-                    <p>Focalizado en las herramientas sin stock (Cantidad 0).</p>
-                    <a asp-action="Inventario" class="btn btn-warning">Generar</a>
-                </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-4">
+        <div class="report-card">
+            <div class="report-card-header orange">
+                <i class="bi bi-exclamation-circle"></i>
+                Reporte de Inventario
+            </div>
+            <div class="report-card-body">
+                <p>Focalizado en las herramientas sin stock (Cantidad 0).</p>
+                <a asp-action="Inventario" class="btn-primary-custom" style="background: var(--warning);">
+                    <i class="bi bi-play-circle"></i> Generar
+                </a>
             </div>
         </div>
     </div>
